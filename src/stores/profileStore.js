@@ -1,7 +1,8 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
 import { reactive, ref } from 'vue';
-import { vueToast } from '../functions'
+import { vueToast } from '../functions';
+import { decrypt } from '../functions';
 
 export const useProfileStore = defineStore('profile', () => {
     const apiUrl = import.meta.env.VITE_APP_API_URL;
@@ -21,7 +22,7 @@ export const useProfileStore = defineStore('profile', () => {
         newPassword: '',
         confirmPassword: ''
     });
-    const user = ref(JSON.parse(localStorage.getItem('user_info')));
+    const user = ref(JSON.parse(decrypt(localStorage.getItem('user_info'))));
     const file = ref('');
   
     const fetchProfileHandler = async () => {

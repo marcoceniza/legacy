@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import axios from 'axios';
 import { reactive, ref } from 'vue';
 import { vueToast } from '../functions'
+import { decrypt } from '../functions';
 
 export const useEmployeeStore = defineStore('employee', () => {
   const apiUrl = import.meta.env.VITE_APP_API_URL;
@@ -19,7 +20,7 @@ export const useEmployeeStore = defineStore('employee', () => {
   const employeeAddress = ref('');
   const updatedPicture = ref('');
   const emailList = ref([]);
-  const user = ref(JSON.parse(localStorage.getItem('user_info')));
+  const user = ref(JSON.parse(decrypt(localStorage.getItem('user_info'))));
   const toUpdate = reactive({
     Firstname: '',
     Lastname: '',
@@ -124,6 +125,7 @@ export const useEmployeeStore = defineStore('employee', () => {
     isLoading, employeeFirstname, employeeLastname, employeeAddress, 
     employeeEmail, employeePassword, closeModal, showAddModal,
     showUpdateModal, updateEmployeeHandler, toUpdate, showDeleteModal,
-    deleteEmployeeHandler, updatedPicture, showSendMessageModal, emailList
+    deleteEmployeeHandler, updatedPicture, showSendMessageModal, emailList,
+    user
   }
 })

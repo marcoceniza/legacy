@@ -1,6 +1,5 @@
 import axios from 'axios';
 import CryptoJS from 'crypto-js';
-import favicon from '@/assets/favicon.png';
 
 export const API_URL = import.meta.env.VITE_APP_API_URL;
 
@@ -568,28 +567,6 @@ function splitTask(str) {
     }
 };
 
-function showNotification(title, options) {
-    // Check if the browser supports notifications
-    if (!("Notification" in window)) {
-        console.log("This browser does not support desktop notifications");
-        return;
-    }
-
-    // Check if the user has granted permission to show notifications
-    if (Notification.permission === "granted") {
-        // If permission has been granted, show the notification
-        new Notification(title, { icon: favicon, ...options });
-    } else if (Notification.permission !== "denied") {
-        // If permission hasn't been granted or denied, request permission
-        Notification.requestPermission().then(function (permission) {
-            if (permission === "granted") {
-                // If permission has been granted, show the notification
-                new Notification(title, { icon: favicon, ...options });
-            }
-        });
-    }
-};
-
 function numberOnly(event) {
     const key = event.key;
 
@@ -673,7 +650,6 @@ export {
     totalStartEndTime,
     totalTime,
     splitTask,
-    showNotification,
     numberOnly,
     todayDate,
     handleDateChange,

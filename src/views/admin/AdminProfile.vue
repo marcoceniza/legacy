@@ -22,13 +22,15 @@
                     <!-- breadcrumb end -->
                     <div class="flex justify-between items-center">
                         <p class="text-2xl font-semibold mb-2">Admin, Profile!</p>
-                        <button @click="profileStore.showUpdatePassModal = true" class="btn btn-success">Change Password</button>
                     </div>
                 </div>
 
                 <div class="p-6 flex flex-wrap justify-between">
                     <section class="w-[60%] shadow-2xl p-6 max-[1300px]:w-[100%]">
-                        <h4 class="mt-4">Personal Information</h4>
+                        <div class="flex justify-between">
+                            <h4 class="mt-4">Personal Information</h4>
+                            <button @click="profileStore.showUpdatePassModal = true" class="mt-4 ml-2 relative btn btn-success w-[117px] h-[40px]"><LockClosedIcon class="h-5 w-5 text-white absolute top-[9px]" /> <span class="block text-right">Password</span></button>
+                        </div>
                         <form class="mx-auto rounded-[12px] p-[25px] relative">
                             <div class="flex flex-wrap justify-between">
                                 <div class="relative w-[48%]">
@@ -94,7 +96,7 @@
 </template>
 
 <script setup>
-import { EnvelopeIcon, UserIcon, MapIcon, ClipboardDocumentIcon, PaperClipIcon } from '@heroicons/vue/24/solid';
+import { EnvelopeIcon, UserIcon, MapIcon, ClipboardDocumentIcon, PaperClipIcon, LockClosedIcon } from '@heroicons/vue/24/solid';
 import { ref, onMounted, watch, computed } from 'vue';
 import Navbar from '../../components/Navbar.vue';
 import SidebarAdmin from '../../components/SidebarAdmin.vue';

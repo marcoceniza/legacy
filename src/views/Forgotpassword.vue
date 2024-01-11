@@ -7,9 +7,9 @@
             <label for="email-address-icon" class="block my-2 text-sm font-medium text-[#fff]">Your Email</label>
             <div class="relative">
                 <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none"><EnvelopeIcon class="h-6 w-6 text-gray-500" /></div>
-                <input type="text" class="text-[#1d1d1d] pl-11 text-sm rounded-lg w-full p-[12px]" placeholder="Email">
+                <input type="text" v-model="loginStore.email" class="text-[#1d1d1d] pl-11 text-sm rounded-lg w-full p-[12px]" placeholder="Email">
             </div>
-            <button class="d-block mt-4 p-2 bg-[#0a4a7d] hover:bg-[#1d67a2] text-center w-100 text-[#fff] rounded-lg">Reset Password</button>
+            <button @click.prevent="loginStore.forgotPassword" class="d-block mt-4 p-2 bg-[#0a4a7d] hover:bg-[#1d67a2] text-center w-100 text-[#fff] rounded-lg" :class="{ 'opacity-[0.5]': loginStore.isLoading, 'pointer-events-none': loginStore.isLoading }">{{ loginStore.isLoading ? 'Resetting...' : 'Reset Password' }}</button>
             <button @click="$router.push('/')" class="d-block p-2 border border-[#fff] hover:bg-[#1d67a2] text-center w-100 text-[#fff] mt-2 rounded-lg">Back</button>
         </form>
     </div>
@@ -17,6 +17,9 @@
 
 <script setup>
 import { EnvelopeIcon } from '@heroicons/vue/24/solid';
+import { useLoginStore } from '../stores/loginStore';
+
+const loginStore = useLoginStore();
 
 </script>
 

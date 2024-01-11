@@ -6,12 +6,16 @@
                 <label for="password-icon" class="block my-2 text-sm font-medium text-[#fff]">New Password</label>
                 <div class="relative">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none"><KeyIcon class="h-6 w-6 text-gray-500" /></div>
-                    <input type="password" v-model="profileStore.password.newPassword" class="text-[#1d1d1d] pl-11 text-sm rounded-lg w-full p-[12px]" placeholder="New Password">
+                    <input :type="customStore.showNewPass ? 'text' : 'password'" v-model="profileStore.password.newPassword" class="text-[#1d1d1d] pl-11 text-sm rounded-lg w-full p-[12px]" placeholder="New Password">
+                    <EyeIcon @click="customStore.toggleNewPass" v-show="!customStore.showNewPass && profileStore.password.newPassword.length > 0" class="h-5 w-5 text-gray-500 cursor-pointer absolute right-1 top-[13px]" />
+                    <EyeSlashIcon @click="customStore.toggleNewPass" v-show="customStore.showNewPass && profileStore.password.newPassword.length > 0" class="h-5 w-5 text-gray-500 cursor-pointer absolute right-1 top-[13px]" />
                 </div>
                 <label for="password-icon" class="block my-2 text-sm font-medium text-[#fff]">Confirm Password</label>
                 <div class="relative">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none"><KeyIcon class="h-6 w-6 text-gray-500" /></div>
-                    <input type="password" v-model="profileStore.password.confirmPassword" class="text-[#1d1d1d] pl-11 text-sm rounded-lg w-full p-[12px]" placeholder="Confirm Password">
+                    <input :type="customStore.showConfirmPass ? 'text' : 'password'" v-model="profileStore.password.confirmPassword" class="text-[#1d1d1d] pl-11 text-sm rounded-lg w-full p-[12px]" placeholder="Confirm Password">
+                    <EyeIcon @click="customStore.toggleConfirmPass" v-show="!customStore.showConfirmPass && profileStore.password.confirmPassword.length > 0" class="h-5 w-5 text-gray-500 cursor-pointer absolute right-1 top-[13px]" />
+                    <EyeSlashIcon @click="customStore.toggleConfirmPass" v-show="customStore.showConfirmPass && profileStore.password.confirmPassword.length > 0" class="h-5 w-5 text-gray-500 cursor-pointer absolute right-1 top-[13px]" />
                 </div>
                 <button @click.prevent="profileStore.updatePasswordHandler" class="d-block p-2 bg-[#0a4a7d] hover:bg-[#1d67a2] text-center text-[#fff] mt-4 rounded-lg px-4" :class="{ 'opacity-[0.5]': profileStore.isLoading, 'pointer-events-none': profileStore.isLoading }">{{ profileStore.isLoading ? 'Updating...' : 'Update' }}</button>
             </form>
@@ -20,9 +24,11 @@
 </template>
 
 <script setup>
-import { KeyIcon } from '@heroicons/vue/24/solid';
+import { KeyIcon, EyeIcon, EyeSlashIcon } from '@heroicons/vue/24/solid';
 import { useProfileStore } from '../stores/profileStore';
+import { useCustomStore } from '../stores/customStore';
 
 const profileStore = useProfileStore();
+const customStore = useCustomStore();
 
 </script>

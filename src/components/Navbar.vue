@@ -20,9 +20,10 @@
             </div>
         </div>
         <!-- dropdown menu -->
-        <div v-show="toggleMenu" class="absolute bg-gray-100 border border-t-0 text-center shadow-xl text-gray-700 rounded-b-lg w-44 top-20 right-0 mr-6">
-            <a @click="$router.push('/admin/profile')" class="relative cursor-pointer block px-4 py-2 hover:bg-gray-200 no-underline text-[#555] border-b border-[#ddd]"><UserIcon class="h-5 w-5 text-gray-500 absolute top-3" /> Profile</a>
-            <a href="#" class="relative block px-4 py-2 hover:bg-gray-200 no-underline text-[#555] border-b border-[#ddd]"><ArrowLeftStartOnRectangleIcon class="h-5 w-5 text-gray-500 absolute top-3" /> Logout</a>
+        <div v-show="toggleMenu" class="absolute bg-[#666] border border-t-0 text-center shadow-xl text-white rounded-b-lg w-44 top-20 right-0 mr-6">
+            <a v-if="employeeStore.user.user_type == 1" @click="$router.push('/admin/profile')" class="relative cursor-pointer block px-4 py-2 hover:bg-[#888] no-underline text-white border-b border-[#fff]"><UserIcon class="h-5 w-5 text-white absolute top-3" /> Profile</a>
+            <a v-else @click="$router.push('/employee/profile')" class="relative cursor-pointer block px-4 py-2 hover:bg-[#888] no-underline text-white border-b border-[#fff]"><UserIcon class="h-5 w-5 text-white absolute top-3" /> Profile</a>
+            <a @click="logOut" class="relative cursor-pointer block px-4 py-2 hover:bg-[#888] no-underline text-white border-b border-[#ddd]"><ArrowLeftStartOnRectangleIcon class="h-5 w-5 text-white absolute top-3" /> Logout</a>
         </div>
         <!-- dropdown menu end -->
     </div>
@@ -33,13 +34,23 @@ import { UserIcon, ArrowLeftStartOnRectangleIcon } from '@heroicons/vue/24/solid
 import { onMounted, ref } from 'vue';
 import { useProfileStore } from '../stores/profileStore';
 import { useEmployeeStore } from '../stores/employeeStore';
+import { useRouter } from 'vue-router';
+import { vueToast } from '../functions'
 
 const toggleMenu = ref(false);
 const profileStore = useProfileStore();
 const employeeStore = useEmployeeStore();
+const router = useRouter();
 
 const toggleMenuHandler = () => {
     toggleMenu.value = !toggleMenu.value;
+}
+
+const logOut = () => {
+    localStorage.clear();
+    router.push('/');
+    vueToast('Logout Successfully.', 'success')
+    setTimeout(() => { window.location.reload(); }, 1000);
 }
 
 onMounted(() => {

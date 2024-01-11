@@ -20,10 +20,10 @@
                         </nav>
                         <!-- breadcrumb end -->
                         <div class="flex justify-between items-center mb-6">
-                            <p class="text-2xl font-semibold mb-2 lg:mb-0">Hello, Admin!</p>
+                            <p class="text-2xl font-semibold mb-2 lg:mb-0">Hello, {{ profileStore.profileData.employee_firstname }}!</p>
                             <div>
-                                <button @click="employeeStore.showAddModal = true" class="btn btn-primary">Add Employee</button>
-                                <button @click="employeeStore.showSendMessageModal = true" class="btn btn-success ml-2">Send Message</button>
+                                <button @click="employeeStore.showAddModal = true" class="relative flex btn btn-primary w-[117px]"><UserPlusIcon class="h-5 w-5 text-white absolute top-[9px]" /> <span class="block text-right">Employee</span></button>
+                                <button @click="employeeStore.showSendMessageModal = true" class="ml-2 relative flex btn btn-success w-[111px]"><ChatBubbleLeftIcon class="h-5 w-5 text-white absolute top-[9px]" /> <span class="block text-right">Message</span></button>
                             </div>
                         </div>
                     </div>
@@ -69,20 +69,22 @@
 </template>
 
 <script setup>
+import { UserPlusIcon, ChatBubbleLeftIcon, ChevronRightIcon } from '@heroicons/vue/24/solid';
 import { ref, onMounted } from 'vue';
 import Navbar from '../../components/Navbar.vue';
 import SidebarAdmin from '../../components/SidebarAdmin.vue';
 import SendMessage from '../../components/SendMessage.vue';
 import AddEmployee from '../../components/AddEmployee.vue';
 import UpdateEmployee from '../../components/UpdateEmployee.vue';
-import { ChevronRightIcon } from '@heroicons/vue/24/outline';
 import DataTable from 'datatables.net-vue3';
 import DataTablesCore from 'datatables.net-bs5';
 import { useEmployeeStore } from '../../stores/employeeStore';
+import { useProfileStore } from '../../stores/profileStore';
 
 DataTable.use(DataTablesCore);
 
 const employeeStore = useEmployeeStore();
+const profileStore = useProfileStore();
 const sidebar = ref(false);
 const loginID = ref();
 const employeeID = ref();
@@ -116,6 +118,7 @@ const showSidebarHandler = () => {
 
 onMounted(() => {
     employeeStore.fetchEmployeeHandler();
+    profileStore.fetchProfileHandler();
 
     // addan og listener kay dili mo gana ang @click sa button
     document.addEventListener('click', function (event) {
