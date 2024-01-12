@@ -7,6 +7,9 @@ import { decrypt } from '../functions';
 export const useProfileStore = defineStore('profile', () => {
     const apiUrl = import.meta.env.VITE_APP_API_URL;
     const isLoading = ref(false);
+    const isUpdatingImg = ref(false);
+    const isUpdatingInfo = ref(false);
+    const isUpdatingPass = ref(false);
     const profileData = ref([]);
     const showUpdatePassModal = ref(false);
     const toUpdate = reactive({
@@ -50,7 +53,7 @@ export const useProfileStore = defineStore('profile', () => {
 
     const updateProfileHandler = async () => {
         try {
-          isLoading.value = true;
+          isUpdatingInfo.value = true;
           const formData = new FormData();
           formData.append('loginID', toUpdate.LoginID);
           formData.append('toUpdateEmail', toUpdate.Email);
@@ -62,7 +65,7 @@ export const useProfileStore = defineStore('profile', () => {
           const res = await axios.post(apiUrl + 'updateProfile', formData);
           if(!res) vueToast(res.data.message, 'danger');
           vueToast(res.data.message, 'success');
-          isLoading.value = false;
+          isUpdatingInfo.value = false;
     
           fetchProfileHandler();
         }catch(error) {
@@ -72,7 +75,7 @@ export const useProfileStore = defineStore('profile', () => {
 
     const updatePasswordHandler = async () => {
         try {
-            isLoading.value = true;
+            isUpdatingPass.value = true;
             const formData = new FormData();
             formData.append('loginID', user.value.login_id);
             formData.append('newPassword', password.newPassword);
@@ -80,15 +83,15 @@ export const useProfileStore = defineStore('profile', () => {
             const res = await axios.post(apiUrl + 'updatePassword', formData);
             if(res.data.status == 'error') {
                 vueToast(res.data.message, 'danger');
-                return isLoading.value = false;
+                return isUpdatingPass.value = false;
             }
             vueToast(res.data.message, 'success');
-            isLoading.value = false;
+            isUpdatingPass.value = false;
 
             password.newPassword = '';
             password.confirmPassword = '';
             showUpdatePassModal.value = false;
-            fetchProfileHandler();
+            
         }catch(error) {
             console.log('Error updating password', error);
         }
@@ -96,7 +99,7 @@ export const useProfileStore = defineStore('profile', () => {
 
     const updateProfilePicture = async () => {
         try {
-            isLoading.value = true;
+            isUpdatingImg.value = true;
             const formData = new FormData();
             formData.append('loginID', toUpdate.LoginID);
             formData.append('picture', file.value);
@@ -104,9 +107,9 @@ export const useProfileStore = defineStore('profile', () => {
             const res = await axios.post(apiUrl + 'updatePicture', formData);
             if(!res) vueToast(res.data.message, 'danger');
             vueToast(res.data.message, 'success');
-            isLoading.value = false;
+            isUpdatingImg.value = false;
+            window.location.reload();
 
-            fetchProfileHandler();
         }catch(error) {
             console.log('Error updating picture', error);
         }
@@ -116,6 +119,6 @@ export const useProfileStore = defineStore('profile', () => {
         apiUrl, isLoading, profileData, toUpdate,
         fetchProfileHandler, updateProfileHandler, updatePasswordHandler,
         updateProfilePicture, file, user, showUpdatePassModal,
-        password
+        password, isUpdatingImg, isUpdatingInfo, isUpdatingPass
     }
 })

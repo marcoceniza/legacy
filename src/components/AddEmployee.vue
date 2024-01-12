@@ -26,7 +26,9 @@
                 <label for="password-icon" class="block my-2 text-sm font-medium text-[#fff]">Password <small>*</small></label>
                 <div class="relative">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none"><KeyIcon class="h-6 w-6 text-gray-500" /></div>
-                    <input type="password" v-model="employeeStore.employeePassword" class="text-[#1d1d1d] pl-11 text-sm rounded-lg w-full p-[12px]" placeholder="Password">
+                    <input :type="customStore.showPass ? 'text' : 'password'" v-model="employeeStore.employeePassword" class="text-[#1d1d1d] pl-11 text-sm rounded-lg w-full p-[12px]" placeholder="Password">
+                    <EyeIcon @click="customStore.togglePass" v-show="!customStore.showPass && employeeStore.employeePassword.length > 0" class="h-5 w-5 text-gray-500 cursor-pointer absolute right-1 top-[13px]" />
+                    <EyeSlashIcon @click="customStore.togglePass" v-show="customStore.showPass && employeeStore.employeePassword.length > 0" class="h-5 w-5 text-gray-500 cursor-pointer absolute right-1 top-[13px]" />
                 </div>
                 <button @click.prevent="employeeStore.addEmployeeHandler" class="d-block p-2 bg-[#0a4a7d] hover:bg-[#1d67a2] text-center text-[#fff] mt-4 rounded-lg px-4" :class="{ 'opacity-[0.5]': employeeStore.isLoading, 'pointer-events-none': employeeStore.isLoading }">{{ employeeStore.isLoading ? 'Adding...' : 'Add' }}</button>
             </form>
@@ -35,9 +37,11 @@
 </template>
 
 <script setup>
-import { EnvelopeIcon, KeyIcon, UserIcon, MapIcon } from '@heroicons/vue/24/solid';
+import { EnvelopeIcon, EyeIcon, EyeSlashIcon, UserIcon, MapIcon, KeyIcon } from '@heroicons/vue/24/solid';
 import { useEmployeeStore } from '../stores/employeeStore';
+import { useCustomStore } from '../stores/customStore';
 
 const employeeStore = useEmployeeStore();
+const customStore = useCustomStore();
 
 </script>

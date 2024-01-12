@@ -1,5 +1,5 @@
 <template>
-    <div class="w-1/2 md:w-1/3 lg:w-64 fixed md:top-0 md:left-0 h-screen lg:block bg-gray-100 z-30" id="main-nav">
+    <div class="w-1/2 md:w-1/3 lg:w-64 fixed md:top-0 md:left-0 h-screen bg-gray-100 z-30 max-[1200px]:shadow-[0px_0px_12px_#b9b9b9;]">
         <div class="w-full h-20 border-b flex justify-center px-4 items-center mb-8 bg-[#0a4a7d]">
             <figure class="p-[30px] mt-3"><img src="../assets/images/main-logo.png" alt="main logo"></figure>
         </div>

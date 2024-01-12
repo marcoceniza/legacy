@@ -25,8 +25,9 @@
                             </div>
                         </div>
                         <div class="text-center">
-                            <iframe id="myIframe" class="w-full" :src="formStore.iframeSrc" loading="lazy"></iframe>
+                            <iframe id="myIframe" class="w-full" src="https://www.legacyhealthus.com/wp-content/themes/legacyhealthal684/forms/DocumentControlandTraining.php" loading="lazy"></iframe>
                         </div>
+                        <p v-show="showArrow" @click="scrollToTop" class="cursor-pointer fixed bottom-[30px] right-[30px] w-[45px] h-[45px] flex justify-center items-center rounded-[30px] bg-[#0a4a7d]"><ArrowUpIcon class="h-5 w-5 text-white font-bold mx-1" /></p>
                     </div>
             </div>
         </div>
@@ -34,10 +35,10 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import Navbar from '../../components/Navbar.vue';
 import SidebarUser from '../../components/SidebarUser.vue';
-import { ChevronRightIcon } from '@heroicons/vue/24/solid';
+import { ChevronRightIcon, ArrowUpIcon } from '@heroicons/vue/24/solid';
 import { useProfileStore } from '../../stores/profileStore';
 import { useFormStore } from '../../stores/formStore';
 
@@ -45,13 +46,35 @@ const sidebar = ref(false);
 const profileStore = useProfileStore();
 const formStore = useFormStore();
 const myIframe = ref(null);
+const showArrow = ref(false);
 
 const showSidebarHandler = () => {
     sidebar.value = !sidebar.value;
 }
 
+const scrollToTop = () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth' // Use smooth scrolling if available
+    });
+}
+
+const handleScroll = () => {
+    showArrow.value = window.scrollY > 200;
+};
+
 onMounted(() => {
     profileStore.fetchProfileHandler();
+    window.addEventListener('scroll', handleScroll);
+
+    // Parent document
+    window.addEventListener('message', function(event) {
+        // Check the origin of the message to ensure it's from the same domain
+        if (event.origin === 'https://www.legacyhealthus.com') {
+            // Check the data sent from the iframe
+            if (event.data === 'submitButtonClicked') scrollToTop();
+        }
+    });
 
     setTimeout(() => {
         // Ensure the iframe is rendered before attempting to access it
@@ -71,6 +94,10 @@ onMounted(() => {
             console.error('Iframe element is null or undefined.');
         }
     }, 3000)
+});
+
+onUnmounted(() => {
+    window.removeEventListener('scroll', handleScroll);
 });
 
 </script>

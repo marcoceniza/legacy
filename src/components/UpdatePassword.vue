@@ -17,7 +17,7 @@
                     <EyeIcon @click="customStore.toggleConfirmPass" v-show="!customStore.showConfirmPass && profileStore.password.confirmPassword.length > 0" class="h-5 w-5 text-gray-500 cursor-pointer absolute right-1 top-[13px]" />
                     <EyeSlashIcon @click="customStore.toggleConfirmPass" v-show="customStore.showConfirmPass && profileStore.password.confirmPassword.length > 0" class="h-5 w-5 text-gray-500 cursor-pointer absolute right-1 top-[13px]" />
                 </div>
-                <button @click.prevent="profileStore.updatePasswordHandler" class="d-block p-2 bg-[#0a4a7d] hover:bg-[#1d67a2] text-center text-[#fff] mt-4 rounded-lg px-4" :class="{ 'opacity-[0.5]': profileStore.isLoading, 'pointer-events-none': profileStore.isLoading }">{{ profileStore.isLoading ? 'Updating...' : 'Update' }}</button>
+                <button @click.prevent="profileStore.updatePasswordHandler" class="d-block p-2 bg-[#0a4a7d] hover:bg-[#1d67a2] text-center text-[#fff] mt-4 rounded-lg px-4" :class="{ 'opacity-[0.5]': profileStore.isUpdatingPass, 'pointer-events-none': profileStore.isUpdatingPass }">{{ profileStore.isUpdatingPass ? 'Updating...' : 'Update' }}</button>
             </form>
         </div>
     </div>

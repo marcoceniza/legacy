@@ -1,8 +1,8 @@
 <template>
     <div class="leading-normal tracking-normal" id="main-body">
         <div class="flex flex-wrap">
-            <SidebarAdmin />
-            <div class="w-full bg-gray-100 pl-0 lg:pl-64 min-h-screen relative" id="main-content">
+        <SidebarAdmin :class="{ 'max-[1200px]:hidden': !sidebar }" />
+            <div class="w-full bg-gray-100 pl-64 max-[1200px]:pl-0 min-h-screen relative" id="main-content">
                 <Navbar @show-sidebar="showSidebarHandler"/>
                 <div class="p-6 bg-gray-100 mb-20">
                     <div id="home">
@@ -19,7 +19,7 @@
                             </ol>
                         </nav>
                         <!-- breadcrumb end -->
-                        <div class="flex justify-between items-center mb-6">
+                        <div class="flex justify-between items-center mb-6 max-[500px]:flex-col text-center">
                             <p class="text-2xl font-semibold mb-2 lg:mb-0">Hello, {{ profileStore.profileData.employee_firstname }}!</p>
                             <div>
                                 <button @click="employeeStore.showAddModal = true" class="relative flex btn btn-primary w-[117px]"><UserPlusIcon class="h-5 w-5 text-white absolute top-[9px]" /> <span class="block text-right">Employee</span></button>
@@ -27,18 +27,20 @@
                             </div>
                         </div>
                     </div>
-                    <DataTable :data="employeeStore.employeeData" :columns="columns" class="table table-striped text-center" style="margin-top: 20px !important;">
-                        <thead class="table-dark">
-                            <tr>
-                                <th class="text-center">Employee ID</th>
-                                <th class="text-center">Employee Email</th>
-                                <th class="text-center">Employee Firstname</th>
-                                <th class="text-center">Employee Lastname</th>
-                                <th class="text-center">Employee Address</th>
-                                <th class="text-center">Action</th>
-                            </tr>
-                        </thead>
-                    </DataTable>
+                    <div class="w-full max-[1200px]:overflow-scroll">
+                        <DataTable :data="employeeStore.employeeData" :columns="columns" class="table table-striped text-center" style="margin-top: 20px !important;">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th class="text-center">Employee ID</th>
+                                    <th class="text-center">Employee Email</th>
+                                    <th class="text-center">Employee Firstname</th>
+                                    <th class="text-center">Employee Lastname</th>
+                                    <th class="text-center">Employee Address</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                        </DataTable>
+                    </div>
                 </div>
 
                 <!-- send message -->

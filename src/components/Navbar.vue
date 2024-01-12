@@ -1,15 +1,13 @@
 <template>
     <div class="sticky top-0 z-40">
-        <div class="w-full h-20 px-6 border-b flex items-center justify-between bg-[#0a4a7d]">
+        <div class="w-full h-20 px-2 border-b flex items-center justify-between bg-[#0a4a7d]">
             <!-- left navbar -->
             <div class="flex">
+                <figure class="hidden text-left pl-0 max-[1200px]:block py-4 pr-4 my-3 w-[200px]"><img class="p-3" src="../assets/images/main-logo.png" alt="main logo"></figure>
                 <!-- mobile hamburger -->
-                <div class="lg:hidden flex items-center mr-4">
-                    <button @click="$emit('showSidebar')" class="hover:text-blue-500 hover:border-white focus:outline-none navbar-burger">
-                        <svg class="h-5 w-5" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <title>Menu</title>
-                            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-                        </svg>
+                <div class="items-center mr-4 hidden max-[1200px]:flex">
+                    <button @click="$emit('showSidebar')">
+                        <Bars3Icon class="h-7 w-7 text-white" />
                     </button>
                 </div>
             </div>
@@ -30,7 +28,7 @@
 </template>
 
 <script setup>
-import { UserIcon, ArrowLeftStartOnRectangleIcon } from '@heroicons/vue/24/solid';
+import { UserIcon, ArrowLeftStartOnRectangleIcon, Bars3Icon } from '@heroicons/vue/24/solid';
 import { onMounted, ref } from 'vue';
 import { useProfileStore } from '../stores/profileStore';
 import { useEmployeeStore } from '../stores/employeeStore';
