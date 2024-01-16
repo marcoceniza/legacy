@@ -5,9 +5,13 @@
         </div>
         <div class="mb-4 px-4">
             <p class="pl-4 text-sm font-semibold mb-2">MAIN</p>
-            <div @click="$router.push('/admin/dashboard')" :class="{ 'bg-gray-200': customStore.isCurrentRoute('/employee/dashboard') }" class="w-full flex items-center text-blue-400 h-10 pl-4 hover:bg-gray-200 rounded-lg cursor-pointer">
+            <div @click="$router.push('/employee/dashboard')" :class="{ 'bg-gray-200': customStore.isCurrentRoute('/employee/dashboard') }" class="w-full flex items-center text-blue-400 h-10 pl-4 hover:bg-gray-200 rounded-lg cursor-pointer">
                 <ClipboardDocumentCheckIcon class="h-5 w-5 text-[#0a4a7d] font-bold mx-1" />
                 <span class="text-gray-700">Form List</span>
+            </div>
+            <div @click="$router.push('/employee/activity')" :class="{ 'bg-gray-200': customStore.isCurrentRoute('/employee/activity') }" class="w-full flex items-center text-blue-400 h-10 pl-4 hover:bg-gray-200 rounded-lg cursor-pointer">
+                <ClipboardDocumentCheckIcon class="h-5 w-5 text-[#0a4a7d] font-bold mx-1" />
+                <span class="text-gray-700">Activity Log</span>
             </div>
         </div>
     </div>

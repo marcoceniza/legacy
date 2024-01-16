@@ -6,6 +6,7 @@ import AdminProfile from '../views/admin/AdminProfile.vue';
 import EmployeeDashboard from '../views/employee/Dashboard.vue';
 import EmployeeProfile from '../views/employee/EmployeeProfile.vue';
 import EmployeeFormView from '../views/employee/FormView.vue';
+import ActivityLog from '../views/employee/ActivityLog.vue';
 import { decrypt } from '../functions';
 
 const router = createRouter({
@@ -65,6 +66,16 @@ const router = createRouter({
       path: '/employee/form',
       name: 'EmployeeFormView',
       component: EmployeeFormView,
+      beforeEnter: (to, from, next) => {
+        const localData = JSON.parse(decrypt(localStorage.getItem('user_info')));
+        if(!localData) next('/');
+        localData.user_type != 0 ? next('/admin/dashboard') : next();
+      }
+    },
+    {
+      path: '/employee/activity',
+      name: 'ActivityLog',
+      component: ActivityLog,
       beforeEnter: (to, from, next) => {
         const localData = JSON.parse(decrypt(localStorage.getItem('user_info')));
         if(!localData) next('/');

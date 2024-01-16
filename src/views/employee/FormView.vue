@@ -40,11 +40,11 @@ import Navbar from '../../components/Navbar.vue';
 import SidebarUser from '../../components/SidebarUser.vue';
 import { ChevronRightIcon, ArrowUpIcon } from '@heroicons/vue/24/solid';
 import { useProfileStore } from '../../stores/profileStore';
-import { useFormStore } from '../../stores/formStore';
+import { useActivityStore } from '../../stores/activityStore';
 
 const sidebar = ref(false);
 const profileStore = useProfileStore();
-const formStore = useFormStore();
+const activityStore = useActivityStore();
 const myIframe = ref(null);
 const showArrow = ref(false);
 
@@ -72,7 +72,10 @@ onMounted(() => {
         // Check the origin of the message to ensure it's from the same domain
         if (event.origin === 'https://www.legacyhealthus.com') {
             // Check the data sent from the iframe
-            if (event.data === 'submitButtonClicked') scrollToTop();
+            if (event.data === 'submitButtonClicked') {
+                scrollToTop();
+                activityStore.submitForm();
+            }
         }
     });
 

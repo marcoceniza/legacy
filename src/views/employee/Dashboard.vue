@@ -25,30 +25,7 @@
                       </div>
                       <div>
                         <ul class="flex justify-center flex-wrap p-0">
-                            <li class="w-[31%] max-[1200px]:w-[46%] max-[700px]:w-[100%] text-center border-1 border-gray-300 h-[60px] leading-[60px] mb-2 mx-2"><a @click="formStore.showForm('Document'); $router.push('/employee/form')" class="block w-full hover:bg-[#b9b9b9] cursor-pointer">Document Control and Training</a></li>
-                            <li class="w-[31%] max-[1200px]:w-[46%] max-[700px]:w-[100%] text-center border-1 border-gray-300 h-[60px] leading-[60px] mb-2 mx-2"><a @click="formStore.showForm('Annual'); $router.push('/employee/form')" class="block w-full hover:bg-[#b9b9b9] cursor-pointer">Annual Review Documentation</a></li>
-                            <li class="w-[31%] max-[1200px]:w-[46%] max-[700px]:w-[100%] text-center border-1 border-gray-300 h-[60px] leading-[60px] mb-2 mx-2"><a @click="formStore.showForm('Training'); $router.push('/employee/form')" class="block w-full hover:bg-[#b9b9b9] cursor-pointer">Training Form</a></li>
-                            <li class="w-[31%] max-[1200px]:w-[46%] max-[700px]:w-[100%] text-center border-1 border-gray-300 h-[60px] leading-[60px] mb-2 mx-2"><a @click="formStore.showForm('Facility'); $router.push('/employee/form')" class="block w-full hover:bg-[#b9b9b9] cursor-pointer">Facility Licensing</a></li>
-                            <li class="w-[31%] max-[1200px]:w-[46%] max-[700px]:w-[100%] text-center border-1 border-gray-300 h-[60px] leading-[60px] mb-2 mx-2"><a @click="formStore.showForm('FDA'); $router.push('/employee/form')" class="block w-full hover:bg-[#b9b9b9] cursor-pointer">FDA Reporting Job Aid</a></li>
-                            <li class="w-[31%] max-[1200px]:w-[46%] max-[700px]:w-[100%] text-center border-1 border-gray-300 h-[60px] leading-[60px] mb-2 mx-2"><a @click="formStore.showForm('Personnel'); $router.push('/employee/form')" class="block w-full hover:bg-[#b9b9b9] cursor-pointer">Personnel Management</a></li>
-                            <li class="w-[31%] max-[1200px]:w-[46%] max-[700px]:w-[100%] text-center border-1 border-gray-300 h-[60px] leading-[60px] mb-2 mx-2"><a @click="formStore.showForm('Security'); $router.push('/employee/form')" class="block w-full hover:bg-[#b9b9b9] cursor-pointer">Security</a></li>
-                            <li class="w-[31%] max-[1200px]:w-[46%] max-[700px]:w-[100%] text-center border-1 border-gray-300 h-[60px] leading-[60px] mb-2 mx-2"><a @click="formStore.showForm('Housekeeping'); $router.push('/employee/form')" class="block w-full hover:bg-[#b9b9b9] cursor-pointer">Housekeeping</a></li>
-                            <li class="w-[31%] max-[1200px]:w-[46%] max-[700px]:w-[100%] text-center border-1 border-gray-300 h-[60px] leading-[60px] mb-2 mx-2"><a @click="formStore.showForm('Trade'); $router.push('/employee/form')" class="block w-full hover:bg-[#b9b9b9] cursor-pointer">Trade Partner Authentication</a></li>
-                            <li class="w-[31%] max-[1200px]:w-[46%] max-[700px]:w-[100%] text-center border-1 border-gray-300 h-[60px] leading-[60px] mb-2 mx-2"><a @click="formStore.showForm('Transaction'); $router.push('/employee/form')" class="block w-full hover:bg-[#b9b9b9] cursor-pointer">Transaction Data</a></li>
-                            <li class="w-[31%] max-[1200px]:w-[46%] max-[700px]:w-[100%] text-center border-1 border-gray-300 h-[60px] leading-[60px] mb-2 mx-2"><a @click="formStore.showForm('Receiving'); $router.push('/employee/form')" class="block w-full hover:bg-[#b9b9b9] cursor-pointer">Receiving and Putaway Form</a></li>
-                            <li class="w-[31%] max-[1200px]:w-[46%] max-[700px]:w-[100%] text-center border-1 border-gray-300 h-[60px] leading-[60px] mb-2 mx-2"><a @click="formStore.showForm('Suspect'); $router.push('/employee/form')" class="block w-full hover:bg-[#b9b9b9] cursor-pointer">Suspect Product Form</a></li>
-                            <li class="w-[31%] max-[1200px]:w-[46%] max-[700px]:w-[100%] text-center border-1 border-gray-300 h-[60px] leading-[60px] mb-2 mx-2"><a @click="formStore.showForm('Illegitamate'); $router.push('/employee/form')" class="block w-full hover:bg-[#b9b9b9] cursor-pointer">Illegitamate Product Process Form</a></li>
-                            <li class="w-[31%] max-[1200px]:w-[46%] max-[700px]:w-[100%] text-center border-1 border-gray-300 h-[60px] leading-[60px] mb-2 mx-2"><a @click="formStore.showForm('Environment'); $router.push('/employee/form')" class="block w-full hover:bg-[#b9b9b9] cursor-pointer">Environment Controls Form</a></li>
-                            <li class="w-[31%] max-[1200px]:w-[46%] max-[700px]:w-[100%] text-center border-1 border-gray-300 h-[60px] leading-[60px] mb-2 mx-2"><a @click="formStore.showForm('Inventory'); $router.push('/employee/form')" class="block w-full hover:bg-[#b9b9b9] cursor-pointer">Inventory Control Form</a></li>
-                            <li class="w-[31%] max-[1200px]:w-[46%] max-[700px]:w-[100%] text-center border-1 border-gray-300 h-[60px] leading-[60px] mb-2 mx-2"><a @click="formStore.showForm('Order'); $router.push('/employee/form')" class="block w-full hover:bg-[#b9b9b9] cursor-pointer">Order Management and Shipping</a></li>
-                            <li class="w-[31%] max-[1200px]:w-[46%] max-[700px]:w-[100%] text-center border-1 border-gray-300 h-[60px] leading-[60px] mb-2 mx-2"><a @click="formStore.showForm('Recalls'); $router.push('/employee/form')" class="block w-full hover:bg-[#b9b9b9] cursor-pointer">Recalls and Market Withdrawals</a></li>
-                            <li class="w-[31%] max-[1200px]:w-[46%] max-[700px]:w-[100%] text-center border-1 border-gray-300 h-[60px] leading-[60px] mb-2 mx-2"><a @click="formStore.showForm('Quarantine'); $router.push('/employee/form')" class="block w-full hover:bg-[#b9b9b9] cursor-pointer">Quarantine Process</a></li>
-                            <li class="w-[31%] max-[1200px]:w-[46%] max-[700px]:w-[100%] text-center border-1 border-gray-300 h-[60px] leading-[60px] mb-2 mx-2"><a @click="formStore.showForm('Returns'); $router.push('/employee/form')" class="block w-full hover:bg-[#b9b9b9] cursor-pointer">Returns and Destructions</a></li>
-                            <li class="w-[31%] max-[1200px]:w-[46%] max-[700px]:w-[100%] text-center border-1 border-gray-300 h-[60px] leading-[60px] mb-2 mx-2"><a @click="formStore.showForm('Records'); $router.push('/employee/form')" class="block w-full hover:bg-[#b9b9b9] cursor-pointer">Records</a></li>
-                            <li class="w-[31%] max-[1200px]:w-[46%] max-[700px]:w-[100%] text-center border-1 border-gray-300 h-[60px] leading-[60px] mb-2 mx-2"><a @click="formStore.showForm('Crisis'); $router.push('/employee/form')" class="block w-full hover:bg-[#b9b9b9] cursor-pointer">Crisis Operations</a></li>
-                            <li class="w-[31%] max-[1200px]:w-[46%] max-[700px]:w-[100%] text-center border-1 border-gray-300 h-[60px] leading-[60px] mb-2 mx-2"><a @click="formStore.showForm('Investigations'); $router.push('/employee/form')" class="block w-full hover:bg-[#b9b9b9] cursor-pointer">Investigations and Reporting</a></li>
-                            <li class="w-[31%] max-[1200px]:w-[46%] max-[700px]:w-[100%] text-center border-1 border-gray-300 h-[60px] leading-[60px] mb-2 mx-2"><a @click="formStore.showForm('Quality'); $router.push('/employee/form')" class="block w-full hover:bg-[#b9b9b9] cursor-pointer">Quality Management</a></li>
-                            <li class="w-[31%] max-[1200px]:w-[46%] max-[700px]:w-[100%] text-center border-1 border-gray-300 h-[60px] leading-[60px] mb-2 mx-2"><a @click="formStore.showForm('Incident'); $router.push('/employee/form')" class="block w-full hover:bg-[#b9b9b9] cursor-pointer">Incident Report</a></li>
+                            <li v-for="af in activityStore.formText" :key="af" class="w-[31%] max-[1200px]:w-[46%] max-[700px]:w-[100%] text-center border-1 border-gray-300 h-[60px] leading-[60px] mb-2 mx-2"><a @click="formStore.showForm(af); $router.push('/employee/form')" :class="{ 'bg-[green]': af == activityStore.activityData ? true : false }" class="block w-full hover:no-underline cursor-pointer bg-[#ea1c1c] text-white">{{ af }}</a></li>
                         </ul>
                       </div>
                   </div>
@@ -64,10 +41,12 @@ import SidebarUser from '../../components/SidebarUser.vue';
 import { ChevronRightIcon } from '@heroicons/vue/24/solid';
 import { useProfileStore } from '../../stores/profileStore';
 import { useFormStore } from '../../stores/formStore';
+import { useActivityStore } from '../../stores/activityStore';
 
 const sidebar = ref(false);
 const profileStore = useProfileStore();
 const formStore = useFormStore();
+const activityStore = useActivityStore();
 
 const showSidebarHandler = () => {
     sidebar.value = !sidebar.value;
