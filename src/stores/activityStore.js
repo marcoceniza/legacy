@@ -1,19 +1,19 @@
 import { defineStore } from 'pinia';
-import { reactive, ref } from 'vue';
+import { ref } from 'vue';
 import { vueToast } from '../functions';
 import { decrypt } from '../functions';
 import axios from 'axios';
+import { useProfileStore } from './profileStore';
 
 export const useActivityStore = defineStore('activity', () => {
   const apiUrl = import.meta.env.VITE_APP_API_URL;
-  const getFormName = ref(localStorage.getItem('form_name'));
   const user = ref(JSON.parse(decrypt(localStorage.getItem('user_info'))));
   const activityData = ref([]);
   const formText = ref([]);
   const formList = ref([]);
-  const activity = reactive({
-    formName: getFormName,
-  })
+  const isShowActivityModal = ref(false);
+  const profileStore = useProfileStore();
+  const isSubmit = ref(false);
 
   const fetchFormNames = async () => {
     try {
@@ -57,23 +57,40 @@ export const useActivityStore = defineStore('activity', () => {
 
   const submitForm = async () => {
     try {
+      isSubmit.value = true;
       const formData = new FormData();
-      formData.append('formName', activity.formName);
+      formData.append('formName', localStorage.getItem('form_name'));
+      formData.append('firstName', profileStore.profileData.employee_firstname);
+      formData.append('lastName', profileStore.profileData.employee_lastname);
+      formData.append('email', user.value.email);
       formData.append('loginID', user.value.login_id);
 
       const res = await axios.post(apiUrl + 'submitActivityLog', formData);
+      isSubmit.value = false;
       if(res.data.status == 'error') {
         vueToast(res.data.message, 'danger');
         return
       }
+      vueToast(res.data.message, 'success');
 
     }catch(error) {
       console.log('Something went wrong', error);
     }
   }
 
+  const resetActivityData = async () => {
+    try {
+      const res = await axios.get(apiUrl + 'resetActivity');
+      if(res.data.status == 'error') return vueToast(res.data.message, 'danger');
+      vueToast(res.data.message, 'success');
+    }catch(error) {
+      console.log('Something went wrong', error);
+    }
+  }
+
   return {
-    apiUrl, submitForm, activity, getFormName, fetchActivityData,
-    activityData, user, fetchFormNames, formText, formList
+    apiUrl, submitForm, fetchActivityData,
+    activityData, user, fetchFormNames, formText, formList,
+    isShowActivityModal, isSubmit, resetActivityData
   }
 })

@@ -49,6 +49,9 @@
                 <!-- add user -->
                 <AddEmployee v-show="employeeStore.showAddModal" />
 
+                <!-- view activity -->
+                <ViewActivity @closeActivity="activityStore.isShowActivityModal = false" v-show="activityStore.isShowActivityModal" :data="employeeActivity" />
+
                 <!-- update user -->
                 <UpdateEmployee v-show="employeeStore.showUpdateModal" />
 
@@ -73,23 +76,28 @@
 <script setup>
 import { UserPlusIcon, ChatBubbleLeftIcon, ChevronRightIcon } from '@heroicons/vue/24/solid';
 import { ref, onMounted } from 'vue';
-import Navbar from '../../components/Navbar.vue';
+import Navbar from '@/components/Navbar.vue';
 import SidebarAdmin from '../../components/SidebarAdmin.vue';
 import SendMessage from '../../components/SendMessage.vue';
 import AddEmployee from '../../components/AddEmployee.vue';
 import UpdateEmployee from '../../components/UpdateEmployee.vue';
+import ViewActivity from '@/components/ViewActivity.vue';
 import DataTable from 'datatables.net-vue3';
 import DataTablesCore from 'datatables.net-bs5';
 import { useEmployeeStore } from '../../stores/employeeStore';
 import { useProfileStore } from '../../stores/profileStore';
+import { useActivityStore } from '../../stores/activityStore';
+import axios from 'axios';
 
 DataTable.use(DataTablesCore);
 
 const employeeStore = useEmployeeStore();
 const profileStore = useProfileStore();
+const activityStore = useActivityStore();
 const sidebar = ref(false);
 const loginID = ref();
 const employeeID = ref();
+const employeeActivity = ref([]);
 
 const columns = [
     { data: 'employee_id' },
@@ -106,6 +114,7 @@ const columns = [
         render: (data) => {
             return `
                 <div style="display: flex; justify-content: center; gap: 5px;">
+                    <button class="btn btn-primary btn-sm" data-action="view" data-row="${data}">Activity</button>
                     <button class="btn btn-warning btn-sm" data-action="edit" data-row="${data}">Edit</button>
                     <button class="btn btn-danger btn-sm" data-action="delete" data-row="${data}">Delete</button>
                 </div>
@@ -118,14 +127,23 @@ const showSidebarHandler = () => {
   sidebar.value = !sidebar.value;
 }
 
-onMounted(() => {
+const checkActivityID = (actID) => {
+    const formData = new FormData();
+    formData.append('loginID', actID);
+
+    axios.post(activityStore.apiUrl + 'fetchActivity', formData).then(res => {
+        employeeActivity.value = res.data.result;
+    });
+}
+
+onMounted(async () => {
     employeeStore.fetchEmployeeHandler();
     profileStore.fetchProfileHandler();
 
     // addan og listener kay dili mo gana ang @click sa button
-    document.addEventListener('click', function (event) {
-    const action = event.target.dataset.action; // for data-action
-    const row = event.target.dataset.row; // for data-row (getting specific/unique id)
+    document.addEventListener('click', async function (event) {
+    let action = event.target.dataset.action; // for data-action
+    let row = event.target.dataset.row; // for data-row (getting specific/unique id)
 
         if (action === 'edit') {
             employeeStore.employeeData.forEach(res => {
@@ -149,6 +167,9 @@ onMounted(() => {
             });
 
             employeeStore.showDeleteModal = true;
+        } else if (action === 'view') {
+            checkActivityID(row);
+            activityStore.isShowActivityModal = true;
         }
     });
 });

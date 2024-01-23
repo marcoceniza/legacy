@@ -7,12 +7,12 @@
                 <p class="absolute right-6 top-[72px] text-white text-sm italic"><input @click="messageStore.bulkSend" type="checkbox"> Send to All</p>
                 <div class="relative">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none"><EnvelopeIcon class="h-6 w-6 text-gray-500" /></div>
-                    <input type="text" v-model="messageStore.message.Email" class="text-[#1d1d1d] pl-11 text-sm rounded-lg w-full p-[12px]" placeholder="Firstname" :disabled="messageStore.isBulkSend">
+                    <input type="text" v-model="messageStore.message.Email" class="text-[#1d1d1d] pl-11 text-sm rounded-lg w-full p-[12px]" placeholder="Email" :disabled="messageStore.isBulkSend">
                 </div>
                 <label for="fullname-icon" class="block my-2 text-sm font-medium text-[#fff]">Subject <small>*</small></label>
                 <div class="relative">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none"><DocumentIcon class="h-6 w-6 text-gray-500" /></div>
-                    <input type="text" v-model="messageStore.message.Subject" class="text-[#1d1d1d] pl-11 text-sm rounded-lg w-full p-[12px]" placeholder="Lastname">
+                    <input type="text" v-model="messageStore.message.Subject" class="text-[#1d1d1d] pl-11 text-sm rounded-lg w-full p-[12px]" placeholder="Subject">
                 </div>
                 <label for="address-icon" class="block my-2 text-sm font-medium text-[#fff]">Message <small>*</small></label>
                 <div class="relative">

@@ -27,8 +27,8 @@
                         <DataTable :data="activityStore.formList" :columns="columns" class="table table-striped text-center" style="margin-top: 20px !important;">
                             <thead class="table-dark">
                                 <tr>
-                                    <th class="text-center">Activity ID</th>
                                     <th class="text-center">Form Name</th>
+                                    <th class="text-center">Status</th>
                                     <th class="text-center">Submitted Time</th>
                                     <th class="text-center">Submitted Date</th>
                                 </tr>
@@ -52,6 +52,7 @@ import DataTablesCore from 'datatables.net-bs5';
 import { dateFormatV2 } from '../../functions';
 import { useEmployeeStore } from '../../stores/employeeStore';
 import { useActivityStore } from '../../stores/activityStore';
+import { useRoute } from 'vue-router';
 
 DataTable.use(DataTablesCore);
 
@@ -60,18 +61,23 @@ const activityStore = useActivityStore();
 const sidebar = ref(false);
 const loginID = ref();
 const employeeID = ref();
+const route = useRoute();
 
 const columns = [
-    { data: 'activity_id' },
-    { data: 'form_name' },
-    { data: 'submitted_date' ,
+    { data: 'form_text' },
+    { data: 'status',
         render: (data) => {
-            return dateFormatV2('%h:%I:%S %a', new Date(data).getTime());
+            return data == 1 ? 'Done' : '-';
         }
     },
     { data: 'submitted_date' ,
         render: (data) => {
-            return dateFormatV2('%lm %d, %y', new Date(data).getTime());
+            return data == null ? '-' : dateFormatV2('%h:%I:%S %a', new Date(data).getTime());
+        }
+    },
+    { data: 'submitted_date' ,
+        render: (data) => {
+            return data == null ? '-' : dateFormatV2('%lm %d, %y', new Date(data).getTime());
         }
     }
 ];
@@ -81,6 +87,7 @@ const showSidebarHandler = () => {
 }
 
 onMounted(() => {
+    if(route.path == '/employee/activity') return activityStore.fetchActivityData();
 
     // addan og listener kay dili mo gana ang @click sa button
     document.addEventListener('click', function (event) {

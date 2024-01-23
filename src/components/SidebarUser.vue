@@ -10,7 +10,7 @@
                 <span class="text-gray-700">Form List</span>
             </div>
             <div @click="$router.push('/employee/activity')" :class="{ 'bg-gray-200': customStore.isCurrentRoute('/employee/activity') }" class="w-full flex items-center text-blue-400 h-10 pl-4 hover:bg-gray-200 rounded-lg cursor-pointer">
-                <ClipboardDocumentCheckIcon class="h-5 w-5 text-[#0a4a7d] font-bold mx-1" />
+                <ListBulletIcon class="h-5 w-5 text-[#0a4a7d] font-bold mx-1" />
                 <span class="text-gray-700">Activity Log</span>
             </div>
         </div>
@@ -18,7 +18,7 @@
 </template>
 
 <script setup>
-import { ClipboardDocumentCheckIcon } from '@heroicons/vue/24/outline';
+import { ClipboardDocumentCheckIcon, ListBulletIcon } from '@heroicons/vue/24/outline';
 import { useCustomStore } from '../stores/customStore';
 
 const customStore = useCustomStore();
